@@ -116,21 +116,21 @@
     }
     &__link {
       display: block;
-      height: 50%;  
-      background-color: rgba(22,153,137, .90);
+      background-color: rgba(26,22,27, .90);
       margin: 1rem;
       padding: 1rem;
       border-radius: 16px;
       vertical-align: middle;
       transform: perspective(1px) translateZ(0);
       box-shadow: 0 0 1px transparent;
-      color: #0f090d;
+      color: #a47ea5;
       font-weight: 800;
-      font-size: 1.5rem;
+      font-size: 1rem;
       font-family: 'Barlow Semi Condensed', sans-serif;
       font-variant: small-caps;
       text-align: center;
-      letter-spacing: 4px;
+      letter-spacing: 2px;
+      text-underline-position: under;
       &:hover, &:focus, &:active {
 	   animation-duration: 1s;
 	   animation-name: wobble;
@@ -139,7 +139,7 @@
       }
     }
     &__parent {
-        color: pink;
+        color: #6f90b0;
     } 
   }
 </style>
