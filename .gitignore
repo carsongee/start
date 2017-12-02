@@ -78,3 +78,6 @@ target/
 
 # PyEnv
 .python-version
+
+.env
+.htpasswd
