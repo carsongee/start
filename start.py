@@ -21,17 +21,17 @@ GH_SEARCHES = (
     ('changes-requested', 'review:changes_requested author:{}'.format(GH_USERNAME)),
     ('approved', 'review:approved author:{}'.format(GH_USERNAME)),
 )
+# Write out htpasswd to path if environment variable set
+HTPASSWD_PATH = abspath('.htpasswd')
+HTPASSWD = env.get('START_HTPASSWD')
+if HTPASSWD:
+    with open(HTPASSWD_PATH, 'w') as wfile:
+        wfile.write(HTPASSWD)
 
 app = Flask(__name__, static_folder='./dist/static', template_folder='./dist/')
 app.config['FLASK_AUTH_ALL'] = True
-app.config['FLASK_HTPASSWD_PATH'] = abspath('.htpasswd')
+app.config['FLASK_HTPASSWD_PATH'] = HTPASSWD_PATH
 htpasswd = HtPasswdAuth(app)
-
-# Write out htpasswd to path if environment variable set
-HTPASSWD = env.get('START_HTPASSWD')
-if HTPASSWD:
-    with open(FLASK_HTPASSWD_PATH, 'w') as wfile:
-        wfile.write(HTPASSWD)
 
 
 def rando(list_like):
