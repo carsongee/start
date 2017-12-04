@@ -16,83 +16,75 @@
         placeholder="Search Links"
         autofocus
         />
-      <ul class="link__results">
+      <transition-group name="bounce" tag="ul" class="link__results">
         <li class="link__result" v-for="link in linkResults" :key="link.url">
           <a class="link__link" :href="link.url" target="_blank">
             <span class="link__parent" v-if="link.parent">{{ link.parent }} &gt; </span>
             {{ link.name }}</a>
         </li>
-      </ul>
+      </transition-group>
     </div>
+    <git-hub></git-hub>
   </div>
 </template>
 <script>
-  export default {
-    name: 'home-page',
-    computed: {
-      allLinks: function allLinks() {
-        const links = [];
-        this.config.fixed_links.forEach(({ url, name, subs }) => {
-          links.push({ url, name });
-          if (subs === undefined) return;
-          subs.forEach(({ url: childUrl, name: childName }) => {
-            links.push({ url: childUrl, name: childName, parent: name });
-          });
+import GitHub from './git-hub';
+
+export default {
+  name: 'home-page',
+  components: { GitHub },
+  props: {
+    config: Object,
+  },
+  computed: {
+    allLinks: function allLinks() {
+      const links = [];
+      this.config.fixed_links.forEach(({ url, name, subs }) => {
+        links.push({ url, name });
+        if (subs === undefined) return;
+        subs.forEach(({ url: childUrl, name: childName }) => {
+          links.push({ url: childUrl, name: childName, parent: name });
         });
-        return links;
-      },
-      linkResults: function linkResults() {
-        if (this.linkSearch === '') return this.config.fixed_links;
-        return this.allLinks.filter((link) => {
-          const lowerSearch = this.linkSearch.toLowerCase();
-          const searchFields = [link.name.toLowerCase(), link.url.toLowerCase()];
-          if (link.parent) searchFields.push(link.parent.toLowerCase());
-          return searchFields.filter(field => field.includes(lowerSearch)).length > 0;
-        });
-      },
+      });
+      return links;
     },
-    data: function data() {
-      return {
-        linkSearch: '',
-      };
+    linkResults: function linkResults() {
+      if (this.linkSearch === '') return this.config.fixed_links;
+      return this.allLinks.filter((link) => {
+        const lowerSearch = this.linkSearch.toLowerCase();
+        const searchFields = [link.name.toLowerCase(), link.url.toLowerCase()];
+        if (link.parent) searchFields.push(link.parent.toLowerCase());
+        return searchFields.filter(field => field.includes(lowerSearch)).length > 0;
+      });
     },
-    props: {
-      config: Object,
-    },
-  };
+  },
+  data: function data() {
+    return {
+      linkSearch: '',
+
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-  @keyframes wobble {
-	16.65% { transform: skew(-12deg); }
-	33.3% { transform: skew(10deg); }
-	49.95% {transform: skew(-6deg);}
-	66.6% { transform: skew(4deg); }
-	83.25% { transform: skew(-2deg); }
-	100% { transform: skew(0); }
-  }
-  
+  @import "../styles/global.scss";
+
   .header {
-    color: white;
-    text-shadow:
-    -2px -2px 1px #1e1e1e,
-    2px -2px 1px #1e1e1e,
-    -2px 2px 1px #1e1e1e,
-    2px 2px 1px #1e1e1e;
-    text-align: center;
+    @include shadow;
     &__title {
       padding: 2rem;
-      font-size: 3rem;  
+      font-size: 3rem;
     }
     &__quote {
       padding: 1rem;
-      font-size: 1.2rem;  
+      font-size: 1.2rem;
     }
   }
 
   .link {
     width: 80%;
-    margin: 0 auto;  
+    margin: 0 auto;
 
     &__search {
       font-size: 2rem;
@@ -116,30 +108,30 @@
     }
     &__link {
       display: block;
-      background-color: rgba(26,22,27, .90);
+      background-color: $bg-color;
       margin: 1rem;
       padding: 1rem;
       border-radius: 16px;
       vertical-align: middle;
       transform: perspective(1px) translateZ(0);
       box-shadow: 0 0 1px transparent;
-      color: #a47ea5;
+      color: $fg-color-light-purple;
       font-weight: 800;
       font-size: 1rem;
-      font-family: 'Barlow Semi Condensed', sans-serif;
+      font-family: $barlow-font;
       font-variant: small-caps;
       text-align: center;
       letter-spacing: 2px;
       text-underline-position: under;
       &:hover, &:focus, &:active {
-	   animation-duration: 1s;
-	   animation-name: wobble;
-	   animation-iteration-count: 1;
-	   animation-timing-function: ease-in-out;
+       animation-duration: 1s;
+       animation-name: wobble;
+       animation-iteration-count: 1;
+       animation-timing-function: ease-in-out;
       }
     }
     &__parent {
-        color: #6f90b0;
-    } 
+        color: $fg-color-blue;
+    }
   }
 </style>

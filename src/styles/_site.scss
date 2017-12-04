@@ -1,0 +1,11 @@
+a, a:visited, a:hover, a:active{
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  position: relative;
+  transition: 0.5s color ease;
+  text-decoration: none;
+  color: $fg-color-light-purple;
+}
+a:hover{
+	color: $fg-color-bright-pink;
+}
