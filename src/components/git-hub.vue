@@ -69,7 +69,7 @@ export default {
     }
     &__container {
         background-color: $bg-color;
-        margin: 16px 0;
+        margin: 16px 0 0 0;
         display: flex;
         flex-wrap: wrap;
         align-items: stretch;
