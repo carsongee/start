@@ -12,7 +12,7 @@
     computed: {
       style: function style() {
         if (this.config.background_img === undefined) return '';
-        return `background: url(${this.config.background_img}) no-repeat center center fixed;`;
+        return `background: url(${this.config.background_img}) no-repeat center center fixed; background-size: cover`;
       },
     },
     data: function appData() {

@@ -3,4 +3,4 @@ flask-htpasswd
 PyYAML
 requests
 uwsgi
-
+paver

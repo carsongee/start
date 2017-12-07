@@ -87,9 +87,6 @@ export default {
         color: $fg-color-light-purple;
         padding: 1rem 0;
     }
-    &__pr-container {
-        overflow: scroll;
-    }
     &__pr-title {
         display: inline-block;
         font-size: 1.8rem;
