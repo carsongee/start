@@ -16,8 +16,6 @@ def run():
     with open('.env', 'r') as config:
         for line in config.read().splitlines():
             name, value = line.split('=', 1)
-            print(value)
-            print(value.strip("'"))
             env[name] = value.strip("'")
     try:
         flask = Popen(
