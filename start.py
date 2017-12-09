@@ -47,6 +47,7 @@ def config():
     data = {}
     data['greeting'] = rando(CONFIG['greetings'])
     data['fixed_links'] = CONFIG['fixed_links']
+    data['header_links'] = CONFIG['header_links']
     data['name'] = CONFIG['name']
     # TODO: Move these off into javascript since they are authless
     try:

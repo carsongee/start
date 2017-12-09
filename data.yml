@@ -23,7 +23,14 @@ greetings:
   - Oh hiiiiiiiiiii
   - Cars + Arson = 
   - beep boop bop
-  - bingbong singsong 
+  - bingbong singsong
+header_links:
+  - url: http://localhost:5000
+    img: /static/img/flask.png
+  - url: http://localhost:8080
+    img: /static/img/nodejs.png
+  - url: http://localhost:8000
+    img: /static/img/django.png
 fixed_links:
   - url: https://mail.worldminus.us
     name: Postman

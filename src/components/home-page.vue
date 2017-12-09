@@ -1,6 +1,13 @@
 <template>
   <div id="home-page">
     <div class="header">
+      <div class="header__links">
+        <a
+          v-for="link in config.header_links"
+          :key="link.url"
+          :href="link.url"
+          ><img :src="link.img" height="64"/></a>
+      </div>
       <h1 class="header__title">{{ config.greeting }} {{ config .name }}</h1>
       <div v-if="config.quote" class="header__quote">
         <p>
@@ -18,7 +25,7 @@
         />
       <transition-group name="bounce" tag="ul" class="link__results">
         <li class="link__result" v-for="link in linkResults" :key="link.url">
-          <a class="link__link" :href="link.url" target="_blank">
+          <a class="link__link" :href="link.url">
             <span class="link__parent" v-if="link.parent">{{ link.parent }} &gt; </span>
             {{ link.name }}</a>
         </li>
@@ -72,6 +79,11 @@ export default {
 
   .header {
     @include shadow;
+    &__links {
+      position: absolute;
+      right: 16px;
+      top:16px;
+    }
     &__title {
       padding: 2rem;
       font-size: 3rem;

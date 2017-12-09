@@ -9,3 +9,7 @@ a, a:visited, a:hover, a:active{
 a:hover{
 	color: $fg-color-bright-pink;
 }
+input:focus, textarea:focus {
+    outline: none;
+}
+
