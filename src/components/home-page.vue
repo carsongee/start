@@ -83,6 +83,9 @@ export default {
       position: absolute;
       right: 16px;
       top:16px;
+      @include breakpoint(xs) {
+          display: none;
+      }
     }
     &__title {
       padding: 2rem;
@@ -101,13 +104,12 @@ export default {
     &__search {
       font-size: 2rem;
       width: 100%;
-      padding: 0 2rem;
-      border-radius: 1rem;
+      padding: 0 8px;
+      border-radius: 8px;
     }
     &__results {
       width: 100%;
       margin: 0 auto;
-      padding: 0 2rem;
       border-radius: 1rem;
       display: flex;
       flex-wrap: wrap;

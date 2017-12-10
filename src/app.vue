@@ -45,6 +45,7 @@ h1 {
 body {
     font-family: 'Slabo 27px', serif;
     margin: 0;
+    box-sizing: border-box;
 }
 .bounce-enter-active {
     animation: bounce-in .2s;
