@@ -1,6 +1,8 @@
 Flask
 flask-htpasswd
+pytz
 PyYAML
 requests
 uwsgi
 paver
+git+https://github.com/carsongee/Python-GoogleCalendarParser.git

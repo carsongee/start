@@ -1,7 +1,10 @@
 $bg-color: rgba(26,22,27, .90);
+$bg-color-light: rgba(164, 126, 165, .90);
 $fg-color-primary: #b493b4;
 $fg-color-light-purple: #a47ea5;
+$fg-color-dusky-purple: #1a161b;
 $fg-color-bright-pink: #a40e9d;
+$fg-color-gray: #2a2d32;
 $fg-color-blue: #6f90b0;
 $barlow-font: 'Barlow Semi Condensed', sans-serif;
 
@@ -14,4 +17,3 @@ $barlow-font: 'Barlow Semi Condensed', sans-serif;
     83.25% { transform: skew(-2deg); }
     100% { transform: skew(0); }
 }
-

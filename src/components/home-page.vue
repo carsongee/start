@@ -32,14 +32,16 @@
       </transition-group>
     </div>
     <git-hub></git-hub>
+    <upcoming-appointments></upcoming-appointments>
   </div>
 </template>
 <script>
 import GitHub from './git-hub';
+import UpcomingAppointments from './upcoming-appointments';
 
 export default {
   name: 'home-page',
-  components: { GitHub },
+  components: { GitHub, UpcomingAppointments },
   props: {
     config: Object,
   },

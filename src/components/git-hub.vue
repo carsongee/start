@@ -1,19 +1,17 @@
 <template>
-  <div>
-    <div v-if="isLoaded">
-      <h2 class="gh__title">Scribe</h2>
-      <div class="gh__container">
-        <div v-for="prType in prTypes" key="0" class="gh__type-container">
-          <h3 class="gh__type-title">{{ prType[0] }}</h3>
-          <h4 v-if="prType[1].length === 0">All Set Here!</h4>
-          <div v-for="pr in prType[1]" key="url" class="gh__pr-container">
-            <a class="gh__pr-title" target="_blank" :href="pr.html_url">{{ pr.title }}</a>
-            <p v-html="$options.filters.markdown(pr.body)"></p>
-          </div>
-        </div>
+<div v-if="isLoaded">
+  <h2 class="gh__title">Scribe</h2>
+  <div class="gh__container">
+    <div v-for="prType in prTypes" key="0" class="gh__type-container">
+      <h3 class="gh__type-title">{{ prType[0] }}</h3>
+      <h4 v-if="prType[1].length === 0">All Set Here!</h4>
+      <div v-for="pr in prType[1]" key="url" class="gh__pr-container">
+        <a class="gh__pr-title" target="_blank" :href="pr.html_url">{{ pr.title }}</a>
+        <p v-html="$options.filters.markdown(pr.body)"></p>
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>

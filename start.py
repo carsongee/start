@@ -1,3 +1,5 @@
+from ast import literal_eval
+from datetime import datetime, timedelta
 import io
 from os import environ as env
 from os.path import abspath, dirname, join, realpath
@@ -5,7 +7,10 @@ from random import randint
 
 from flask import Flask, render_template, jsonify
 from flask_htpasswd import HtPasswdAuth
+from google_calendar_parser import CalendarParser
+from pytz import timezone
 import requests
+from werkzeug.contrib.cache import SimpleCache
 import yaml
 
 API_PREFIX = '/start-api/v1/'
@@ -21,6 +26,8 @@ GH_SEARCHES = (
     ('changes-requested', 'review:changes_requested author:{}'.format(GH_USERNAME)),
     ('approved', 'review:approved author:{}'.format(GH_USERNAME)),
 )
+CAL_URLS = literal_eval(env.get('CAL_URLS', False) or {})
+
 # Write out htpasswd to path if environment variable set
 HTPASSWD_PATH = abspath('.htpasswd')
 HTPASSWD = env.get('START_HTPASSWD')
@@ -31,6 +38,7 @@ if HTPASSWD:
 app = Flask(__name__, static_folder='./dist/static', template_folder='./dist/')
 app.config['FLASK_AUTH_ALL'] = True
 app.config['FLASK_HTPASSWD_PATH'] = HTPASSWD_PATH
+cache = SimpleCache()
 htpasswd = HtPasswdAuth(app)
 
 
@@ -71,6 +79,7 @@ def config():
 
     return jsonify(data)
 
+
 @app.route(API_PREFIX + 'github')
 def github():
     """Get pull requests and any other github related data."""
@@ -87,6 +96,30 @@ def github():
             pass
     return jsonify(data)
 
+
+@app.route(API_PREFIX + 'cal')
+def cal():
+    """Grab today's calendar items from a list of icals."""
+    # Use cache for today if available
+    todays_events = cache.get('todays-events')
+    if todays_events is not None:
+        return todays_events
+
+    tz = timezone('America/New_York')
+    now = datetime.now(tz)
+    todays_events = {}
+    for cal in CAL_URLS:
+        todays_events[cal['name']] = []
+        cal_parser = CalendarParser(ics_url=cal['url'])
+        for event in cal_parser.parse_ics(overwrite_events=False):
+            event.start_time = event.start_time.replace(tzinfo=tz)
+            if now < event.start_time < now + timedelta(days=1):
+                todays_events[cal['name']].append(event)
+    results = jsonify(todays_events)
+    cache.set('todays-events', results, timeout=60 * 60 * 5)
+    return results
+
+
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def catch_all(path):
@@ -95,4 +128,3 @@ def catch_all(path):
     if app.debug:
         return requests.get('http://localhost:8080/{}'.format(path)).text
     return render_template("index.html")
-
