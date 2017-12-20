@@ -5,4 +5,4 @@ PyYAML
 requests
 uwsgi
 paver
-git+https://github.com/carsongee/Python-GoogleCalendarParser.git
+-e git+https://github.com/carsongee/Python-GoogleCalendarParser.git#egg=google-calendar-parser
