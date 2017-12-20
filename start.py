@@ -8,7 +8,7 @@ from random import randint
 from flask import Flask, render_template, jsonify
 from flask_htpasswd import HtPasswdAuth
 from google_calendar_parser import CalendarParser
-from pytz import timezone
+from pytz import utc
 import requests
 from werkzeug.contrib.cache import SimpleCache
 import yaml
@@ -105,16 +105,25 @@ def cal():
     if todays_events is not None:
         return todays_events
 
-    tz = timezone('America/New_York')
-    now = datetime.now(tz)
+    now = datetime.now()
     todays_events = {}
     for cal in CAL_URLS:
         todays_events[cal['name']] = []
         cal_parser = CalendarParser(ics_url=cal['url'])
         for event in cal_parser.parse_ics(overwrite_events=False):
-            event.start_time = event.start_time.replace(tzinfo=tz)
             if now < event.start_time < now + timedelta(days=1):
+                if cal_parser.time_zone != utc and cal_parser.time_zone is not None:
+                    # We need to localize and because Flask until 0.13
+                    # it won't handle timezone aware, so we have to
+                    # float it back.
+                    event.start_time = cal_parser.time_zone.localize(
+                        event.start_time
+                    ).astimezone(utc)
+                    event.end_time = cal_parser.time_zone.localize(
+                        event.end_time
+                    ).astimezone(utc)
                 todays_events[cal['name']].append(event)
+
     results = jsonify(todays_events)
     cache.set('todays-events', results, timeout=60 * 60 * 5)
     return results
