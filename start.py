@@ -18,7 +18,8 @@ BING = 'https://www.bing.com'
 PATH = dirname(realpath(__file__))
 CONFIG = yaml.load(io.open(join(PATH, 'data.yml'), 'r', encoding='UTF-8'))
 GH_URL = 'https://api.github.com/'
-GH_HEADERS = {'Authorization': 'token {}'.format(env.get('GH_TOKEN'))}
+GH_TOKEN = env.get('GH_TOKEN')
+GH_HEADERS = {'Authorization': 'token {}'.format('GH_TOKEN')}
 GH_USERNAME = env.get('GH_USERNAME')
 GH_SEARCH_PREFIX = 'search/issues?q=state:open type:pr '
 GH_SEARCHES = (
@@ -28,7 +29,7 @@ GH_SEARCHES = (
 )
 
 CAL_URLS = env.get('CAL_URLS', False)
-CAL_URLS = literal_eval(CAL_URLS) if CAL_URLS_ENV else {}
+CAL_URLS = literal_eval(CAL_URLS) if CAL_URLS else {}
 
 # Write out htpasswd to path if environment variable set
 HTPASSWD_PATH = abspath('.htpasswd')
@@ -85,6 +86,8 @@ def config():
 @app.route(API_PREFIX + 'github')
 def github():
     """Get pull requests and any other github related data."""
+    if not GH_TOKEN:
+        return jsonify({})
     data = {}
     for key, search in GH_SEARCHES:
         try:
