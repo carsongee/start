@@ -26,7 +26,9 @@ GH_SEARCHES = (
     ('changes-requested', 'review:changes_requested author:{}'.format(GH_USERNAME)),
     ('approved', 'review:approved author:{}'.format(GH_USERNAME)),
 )
-CAL_URLS = literal_eval(env.get('CAL_URLS', False) or {})
+
+CAL_URLS = env.get('CAL_URLS', False)
+CAL_URLS = literal_eval(CAL_URLS) if CAL_URLS_ENV else {}
 
 # Write out htpasswd to path if environment variable set
 HTPASSWD_PATH = abspath('.htpasswd')
