@@ -6,8 +6,8 @@
       <h3 class="gh__type-title">{{ prType[0] }}</h3>
       <h4 v-if="prType[1].length === 0">All Set Here!</h4>
       <div v-for="pr in prType[1]" key="url" class="gh__pr-container">
-        <a class="gh__pr-title" target="_blank" :href="pr.html_url">{{ pr.title }}</a>
-        <p v-html="$options.filters.markdown(pr.body)"></p>
+        <a class="gh__pr-title" :href="pr.html_url">{{ pr.title }}</a>
+        <p class="gh__markdown" v-html="$options.filters.markdown(pr.body)"></p>
       </div>
     </div>
   </div>
@@ -57,7 +57,7 @@ export default {
 };
 </script>  
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "../styles/global.scss";
 .gh {
     &__title {
@@ -65,6 +65,7 @@ export default {
         font-size: 3rem;
         margin-top: 2rem;
     }
+
     &__container {
         background-color: $bg-color;
         margin: 16px 0 0 0;
@@ -73,18 +74,23 @@ export default {
         align-items: stretch;
         color: $fg-color-primary;
     }
+
     &__type-container {
-        padding: 2rem;
-        width: calc(33% - 4rem);
         @include breakpoint(xs) {
             width: calc(100% - 4rem);
+            max-width: calc(100% - 4rem);
         }
+        padding: 2rem;
+        max-width: calc(33% - 4rem);
+        width: calc(33% - 4rem);
     }
+
     &__type-title {
         font-size: 1.8rem;
         color: $fg-color-light-purple;
         padding: 1rem 0;
     }
+
     &__pr-title {
         display: inline-block;
         font-size: 1.8rem;
@@ -93,11 +99,21 @@ export default {
         color: #79b2a8;
         margin: 1rem 0;
     }
+
     &__pr-title:visited, &__pr-title:active {
         color: #79b2a8;
     }
+
     &__pr-title:hover {
 	    color: #1a8976;
+    }
+    &__markdown {
+        img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+        }
     }
 }
   

@@ -51,7 +51,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "../styles/global.scss";
 .ua {
     &__title {
@@ -59,6 +59,7 @@ export default {
         font-size: 3rem;
         margin-top: 8rem;
     }
+
     &__container {
         background-color: $bg-color-light;
         color: $fg-color-dusky-purple;
@@ -67,19 +68,23 @@ export default {
         flex-wrap: wrap;
         align-items: stretch;
     }
+
     &__calendar {
+        @include breakpoint(xs) {
+            width: calc(100% - 4rem);
+            max-width: calc(100% - 4rem);
+        }
         padding: 2rem;
         width: calc(33% - 4rem);
         max-width: calc(33% - 4rem);
-        @include breakpoint(xs) {
-            width: calc(100% - 4rem);
-        }
     }
+
     &__cal-title {
         font-size: 1.8rem;
         color: $fg-color-gray;
         padding: 1rem 0;
     }
+
     &__event {
         margin-bottom: 1rem;
     }
