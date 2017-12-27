@@ -1,6 +1,6 @@
 <template>
 <div v-if="isLoaded">
-  <h2 class="gh__title">Scribe</h2>
+  <h2 class="gh__title"><span class="fab fa-github"></span> Scribe</h2>
   <div class="gh__container">
     <div v-for="prType in prTypes" key="0" class="gh__type-container">
       <h3 class="gh__type-title">{{ prType[0] }}</h3>
@@ -67,12 +67,16 @@ export default {
     }
 
     &__container {
-        background-color: $bg-color;
         margin: 16px 0 0 0;
         display: flex;
         flex-wrap: wrap;
         align-items: stretch;
         color: $fg-color-primary;
+        // Permalink - use to edit and share this gradient:
+        // http://colorzilla.com/gradient-editor/#483c4b+0,1a161b+100&0.9+0,0.9+100
+        background: -moz-radial-gradient(center, ellipse cover, rgba(72,60,75,0.9) 0%, rgba(26,22,27,0.9) 70%);
+        background: -webkit-radial-gradient(center, ellipse cover, rgba(72,60,75,0.9) 0%,rgba(26,22,27,0.9) 70%);
+        background: radial-gradient(ellipse at center, rgba(72,60,75,0.9) 0%, rgba(26,22,27,0.9) 70%);
     }
 
     &__type-container {

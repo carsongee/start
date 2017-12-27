@@ -1,13 +1,26 @@
 <template>
-<div v-if="isLoaded">
-  <h2 class="ua__title">Fate</h2>
+<div class="ua" v-if="isLoaded">
+  <h2 class="ua__title"><span class="fas fa-hourglass-half"></span> Fate</h2>
   <div class="ua__container">
     <div v-for="(calendar, name) in calendars" class="ua__calendar">
       <h3 class="ua__cal-title"j>{{ name }}</h3>
       <div v-for="event in calendar" class="ua__event">
-        <h4>{{ event.name }}</h4>
-        <p>{{ event.start_time|time }} - {{ event.end_time|time }}</p>
-      </div>
+        <h4>
+          <span v-if="event.all_day"><span class="fas fa-sun"></span> </span>
+          {{ event.name }}
+        </h4>
+        <p class="ua__times">
+          <i v-if="!event.all_day">
+            {{ event.start_time|time }} - {{ event.end_time|time }}
+          </i>
+        </p>
+        <div v-if="event.location" class="ua__location">
+          <div>
+            <span class="fas fa-location-arrow"></span>
+          </div>
+          <div v-html="linkify(event.location)">
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -16,6 +29,7 @@
 
 <script>
 import axios from 'axios';
+import anchorme from 'anchorme';
 
 export default {
   name: 'upcoming-appointments',
@@ -43,6 +57,12 @@ export default {
       calendars: {},
     };
   },
+  methods: {
+    linkify(value) {
+      console.log(anchorme(value));
+      return anchorme(value);
+    },
+  },
   filters: {
     time(value) {
       return (new Date(value).toLocaleTimeString('en-us'));
@@ -54,6 +74,12 @@ export default {
 <style lang="scss">
 @import "../styles/global.scss";
 .ua {
+    a:hover {
+        color: $fg-color-gray;
+    }
+    a {
+        color: $fg-color-dusky-purple;
+    }
     &__title {
         @include shadow;
         font-size: 3rem;
@@ -61,7 +87,11 @@ export default {
     }
 
     &__container {
-        background-color: $bg-color-light;
+        // Permalink - use to edit and share this gradient:
+        // http://colorzilla.com/gradient-editor/#483c4b+0,a47ea5+1,79567a+62&0.9+0,0.9+62
+        background: -moz-radial-gradient(center, ellipse cover, rgba(92,80,95,0.9) 0%, rgba(121,86,122,0.9) 70%);
+        background: -webkit-radial-gradient(center, ellipse cover, rgba(92,80,95,0.9), rgba(121,86,122,0.9) 70%);
+        background: radial-gradient(ellipse at center, rgba(92,80,95,0.9) 0%, rgba(121,86,122,0.9) 70%); 
         color: $fg-color-dusky-purple;
         margin: 16px 0 0 0;
         display: flex;
@@ -87,6 +117,17 @@ export default {
 
     &__event {
         margin-bottom: 1rem;
+    }
+    &__times {
+        font-size: .8rem;
+        padding-top: 4px;
+    }
+    &__location {
+        display: flex;
+        padding-top: 8px;
+        div {
+            padding-right: 4px;
+        }
     }
 }
 </style>

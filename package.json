@@ -15,6 +15,7 @@
     "postinstall": "node build/build.js"
   },
   "dependencies": {
+    "anchorme": "^1.1.2",
     "axios": "^0.17.1",
     "remarkable": "^1.7.1",
     "vue": "^2.5.2",

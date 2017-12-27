@@ -34,12 +34,16 @@ header_links:
 fixed_links:
   - url: https://mail.worldminus.us
     name: Postman
+    icon: fas fa-envelope
   - url: https://outlook.office365.com/owa/?realm=affoa.org#exsvurl=1&ll-cc=1033&modurl=0
     name: Martinet
+    icon: fas fa-envelope-open
   - url: https://google.com
     name: Oracle
+    icon: fab fa-searchengin 
   - url: https://github.com/pulls
     name: Scribe
+    icon: fab fa-github-alt
     subs:
       - name: Looks ios
         url: https://github.com/affoa/iOS-Looks-App
@@ -69,6 +73,7 @@ fixed_links:
         url: https://github.com/carsongee/carsongee.github.io
   - url: https://travis-ci.com/AFFOA
     name: Butler
+    icon: fab fa-jenkins
     subs:
       - name: looks-android
         url: https://travis-ci.com/AFFOA/Android-Looks-App
@@ -80,12 +85,16 @@ fixed_links:
         url: https://travis-ci.com/AFFOA/AFFOAMemberPortal
   - url: https://feedly.com
     name: Crier
+    icon: fas fa-newspaper
   - url: http://www.zooborns.com/
     name: Feels
+    icon: fas fa-paw
   - url: https://lastpass.com
     name: Harpocrates
+    icon: fas fa-unlock-alt
   - url: https://affoa.signin.aws.amazon.com/console
     name: Atlas
+    icon: fab fa-aws
     subs:
       - name: EB
         url: https://console.aws.amazon.com/elasticbeanstalk/home?region=us-east-1
@@ -103,5 +112,7 @@ fixed_links:
         url: https://console.aws.amazon.com/s3/home?region=us-east-1
   - url: https://facebook.com
     name: Opiate
+    icon: fab fa-facebook
   - url: http://carsongee.com
     name: Vanity
+    icon: fas fa-heart

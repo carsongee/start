@@ -26,8 +26,12 @@
       <transition-group name="bounce" tag="ul" class="link__results">
         <li class="link__result" v-for="link in linkResults" :key="link.url">
           <a class="link__link" :href="link.url">
-            <span class="link__parent" v-if="link.parent">{{ link.parent }} &gt; </span>
-            {{ link.name }}</a>
+            <span v-if="link.icon !== undefined" :class="link.icon"></span> 
+            <span class="link__parent" v-if="link.parent">
+              {{ link.parent }} &gt;
+            </span>
+            {{ link.name }}
+          </a>
         </li>
       </transition-group>
     </div>
@@ -48,11 +52,11 @@ export default {
   computed: {
     allLinks: function allLinks() {
       const links = [];
-      this.config.fixed_links.forEach(({ url, name, subs }) => {
-        links.push({ url, name });
+      this.config.fixed_links.forEach(({ url, icon, name, subs }) => {
+        links.push({ url, name, icon });
         if (subs === undefined) return;
         subs.forEach(({ url: childUrl, name: childName }) => {
-          links.push({ url: childUrl, name: childName, parent: name });
+          links.push({ url: childUrl, icon, name: childName, parent: name });
         });
       });
       return links;
@@ -90,7 +94,7 @@ export default {
       }
     }
     &__title {
-      padding: 2rem;
+      padding: 6rem 2rem 2rem;
       font-size: 3rem;
     }
     &__quote {
@@ -120,7 +124,7 @@ export default {
     }
     &__result {
       display: block;
-      flex-basis: 20%;
+      flex-basis: 25%;
     }
     &__link {
       display: block;
