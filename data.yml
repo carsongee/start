@@ -32,7 +32,13 @@ header_links:
   - url: http://localhost:8000
     img: /static/img/django.png
 fixed_links:
-  - url: https://mail.worldminus.us
+  - url: https://ted.com/surpriseme
+    name: TED
+    icon: fa fa-gift
+  - url: https://en.wikipedia.org/wiki/Special:Random
+    name: Apollo
+    icon: fab fa-wikipedia-w
+  - url: http://mail.worldminus.us
     name: Postman
     icon: fas fa-envelope
   - url: https://outlook.office365.com/owa/?realm=affoa.org#exsvurl=1&ll-cc=1033&modurl=0
@@ -45,7 +51,9 @@ fixed_links:
     name: Scribe
     icon: fab fa-github-alt
     subs:
-      - name: Looks ios
+      - name: affoa
+        url: https://github.com/affoa
+      - name: looks ios
         url: https://github.com/affoa/iOS-Looks-App
       - name: looks android
         url: https://github.com/affoa/Android-Looks-App

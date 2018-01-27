@@ -59,7 +59,6 @@ export default {
   },
   methods: {
     linkify(value) {
-      console.log(anchorme(value));
       return anchorme(value);
     },
   },

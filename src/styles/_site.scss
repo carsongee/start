@@ -1,4 +1,4 @@
-a, a:visited, a:hover, a:active{
+a, a:visited, a:hover, a:active {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   position: relative;
@@ -6,7 +6,7 @@ a, a:visited, a:hover, a:active{
   text-decoration: none;
   color: $fg-color-light-purple;
 }
-a:hover{
+a:hover, a:focus {
 	color: $fg-color-bright-pink;
 }
 input:focus, textarea:focus {

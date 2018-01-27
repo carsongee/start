@@ -19,14 +19,30 @@
       <input
         class="link__search"
         type="text"
+        ref="search"
         v-model="linkSearch"
         placeholder="Search Links"
         autofocus
+        @keyup.enter="goToFirstLink"
+        @keyup.right="moveFocusRight"
+        @keyup.left="moveFocusLeft"
+        @keyup.down.prevent="moveFocusDown"
+        @keyup.up.prevent="moveFocusUp"
+        @focus="resetFocus"
         />
       <transition-group name="bounce" tag="ul" class="link__results">
         <li class="link__result" v-for="link in linkResults" :key="link.url">
-          <a class="link__link" :href="link.url">
-            <span v-if="link.icon !== undefined" :class="link.icon"></span> 
+          <a
+            class="link__link"
+            :ref="link.url"
+            :href="link.url"
+            @keyup.right="moveFocusRight"
+            @keyup.left="moveFocusLeft"
+            @keyup.down.stop="moveFocusDown"
+            @keyup.up.stop="moveFocusUp"
+            @keyup.esc="setSearchFocus"
+            >
+            <span v-if="link.icon !== undefined" :class="link.icon"></span>
             <span class="link__parent" v-if="link.parent">
               {{ link.parent }} &gt;
             </span>
@@ -43,11 +59,27 @@
 import GitHub from './git-hub';
 import UpcomingAppointments from './upcoming-appointments';
 
+const linksPerRow = 4;
+
 export default {
   name: 'home-page',
   components: { GitHub, UpcomingAppointments },
+  mounted() {
+    document.addEventListener('keydown', (event) => {
+      const key = event.which;
+      if (key === 37 || key === 38 || key === 39 || key === 40) {
+        event.preventDefault();
+      }
+    });
+  },
   props: {
     config: Object,
+  },
+  data: function data() {
+    return {
+      linkSearch: '',
+      currentFocus: 0,
+    };
   },
   computed: {
     allLinks: function allLinks() {
@@ -71,11 +103,66 @@ export default {
       });
     },
   },
-  data: function data() {
-    return {
-      linkSearch: '',
+  methods: {
+    resetFocus() {
+      this.currentFocus = 0;
+    },
+    goToFirstLink() {
+      location.assign(this.linkResults[this.currentFocus].url);
+    },
+    setFocus() {
+      const ref = this.$refs[this.linkResults[this.currentFocus].url][0];
+      if (ref !== undefined) {
+        this.$refs[this.linkResults[this.currentFocus].url][0].focus();
+      }
+    },
+    setSearchFocus() {
+      this.$refs.search.focus();
+    },
+    moveFocusRight() {
+      this.currentFocus += 1;
+      if (this.currentFocus >= this.linkResults.length) this.currentFocus = 0;
+      this.setFocus(this.currentFocus);
+    },
+    moveFocusLeft() {
+      this.currentFocus -= 1;
+      if (this.currentFocus < 0) this.currentFocus = this.linkResults.length - 1;
+      this.setFocus(this.currentFocus);
+    },
+    moveFocusUp() {
+      const prevFocus = this.currentFocus;
+      const maxIndex = this.linkResults.length - 1;
 
-    };
+      this.currentFocus -= linksPerRow;
+      if (this.currentFocus < 0) {
+        if (this.linkResults.length <= linksPerRow) {
+          this.currentFocus = prevFocus - 1 < 0 ? maxIndex : prevFocus - 1;
+        } else {
+          // Go to same column on bottom row
+          let itemsInLastRow = this.linkResults.length % linksPerRow;
+          if (itemsInLastRow === 0) itemsInLastRow = linksPerRow;
+          this.currentFocus = (this.linkResults.length - itemsInLastRow) + prevFocus;
+          if (this.currentFocus > maxIndex) {
+            this.currentFocus -= linksPerRow;
+          }
+        }
+      }
+      this.setFocus(this.currentFocus);
+    },
+    moveFocusDown() {
+      const prevFocus = this.currentFocus;
+      const maxIndex = this.linkResults.length - 1;
+      this.currentFocus += linksPerRow;
+      if (this.currentFocus > maxIndex) {
+        if (this.linkResults.length <= linksPerRow) {
+          this.currentFocus = prevFocus + 1 > maxIndex ? 0 : prevFocus + 1;
+        } else {
+          // Go to same column on top row
+          this.currentFocus = prevFocus % linksPerRow;
+        }
+      }
+      this.setFocus(this.currentFocus);
+    },
   },
 };
 </script>
@@ -143,6 +230,9 @@ export default {
       text-align: center;
       letter-spacing: 2px;
       text-underline-position: under;
+      &:focus {
+
+      }
       &:hover, &:focus, &:active {
        animation-duration: 1s;
        animation-name: wobble;
