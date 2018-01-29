@@ -34,7 +34,7 @@ GH_SEARCHES = (
 CAL_URLS = env.get('CAL_URLS', False)
 CAL_URLS = literal_eval(CAL_URLS) if CAL_URLS else {}
 
-CACHE_CONFIG = urlparse(env.get('REDIS_CACHE', 'redis://localhost:6379'))
+CACHE_CONFIG = urlparse(env.get('REDIS_URL', 'redis://localhost:6379'))
 
 # Write out htpasswd to path if environment variable set
 HTPASSWD_PATH = abspath('.htpasswd')
