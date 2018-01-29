@@ -18,6 +18,10 @@ def run():
             name, value = line.split('=', 1)
             env[name] = value.strip("'")
     try:
+        redis = Popen(
+            ['redis-server'],
+             shell=True,
+        )
         flask = Popen(
             ['flask run'],
             shell=True,
@@ -26,6 +30,7 @@ def run():
             ['npm run dev'],
             shell=True,
         )
+        redis.communicate()
         flask.communicate()
         webpack.communicate()
     except KeyboardInterrupt:

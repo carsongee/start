@@ -2,6 +2,7 @@ Flask
 flask-htpasswd
 pytz
 PyYAML
+redis
 requests
 uwsgi
 paver
