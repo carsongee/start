@@ -104,8 +104,8 @@ export default {
             max-width: calc(100% - 4rem);
         }
         padding: 2rem;
-        width: calc(33% - 4rem);
-        max-width: calc(33% - 4rem);
+        width: calc(50% - 4rem);
+        max-width: calc(50% - 4rem);
     }
 
     &__cal-title {
