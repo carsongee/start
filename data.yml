@@ -3,27 +3,6 @@ greetings:
   - Welcome
   - Fuck You
   - Top of the Morning
-  - Bliss to You
-  - Youʼre Going to Make it
-  - Suck It
-  - Youʼre the Best
-  - Down with the Tyrant
-  - Hold on to your Butts, Itʼs
-  - Lose your Mind, Itʼs
-  - Lookinʼ fine AF
-  - ...wtf
-  - Deena sure does love you
-  - I know what you did
-  - Give them hell
-  - The world is better, thanks to
-  - Hold the line  
-  - Have you kissed your Deena today
-  - Letʼs get shit done
-  - If only they had
-  - Oh hiiiiiiiiiii
-  - Cars + Arson = 
-  - beep boop bop
-  - bingbong singsong
 header_links:
   - url: http://localhost:5000
     img: /static/img/flask.png
