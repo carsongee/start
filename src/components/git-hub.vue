@@ -2,10 +2,10 @@
 <div v-if="isLoaded">
   <h2 class="gh__title"><span class="fab fa-github"></span> Scribe</h2>
   <div class="gh__container">
-    <div v-for="prType in prTypes" key="0" class="gh__type-container">
+    <div v-for="(prType, index) in prTypes" :key="`prtype-${index}`" class="gh__type-container">
       <h3 class="gh__type-title">{{ prType[0] }}</h3>
       <h4 v-if="prType[1].length === 0">All Set Here!</h4>
-      <div v-for="pr in prType[1]" key="url" class="gh__pr-container">
+      <div v-for="pr in prType[1]" :key="pr.url" class="gh__pr-container">
         <a class="gh__pr-title" :href="pr.html_url">{{ pr.title }}</a>
         <p class="gh__markdown" v-html="$options.filters.markdown(pr.body)"></p>
       </div>
