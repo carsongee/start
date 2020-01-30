@@ -125,7 +125,7 @@ def github():
                 headers=GH_HEADERS,
                 timeout=5,
             ).json()
-            data[key] = response['items']
+            data[key] = response['items'][:5]
         except requests.RequestException:
             pass
     response = jsonify(data)
