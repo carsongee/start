@@ -1,8 +1,11 @@
-name: Carson
+name: Cas
 greetings:
   - Welcome
-  - Fuck You
+  - Fuck Ya
   - Top of the Morning
+  - Killin’ it
+  - Watch out! It’s
+  - Who dat?! It
 header_links:
   - url: http://localhost:5000
     img: /static/img/flask.png
@@ -20,9 +23,6 @@ fixed_links:
   - url: http://mail.worldminus.us
     name: Postman
     icon: fas fa-envelope
-  - url: https://outlook.office365.com/owa/?realm=affoa.org#exsvurl=1&ll-cc=1033&modurl=0
-    name: Martinet
-    icon: fas fa-envelope-open
   - url: https://google.com
     name: Oracle
     icon: fab fa-searchengin 
@@ -30,30 +30,22 @@ fixed_links:
     name: Scribe
     icon: fab fa-github-alt
     subs:
-      - name: affoa
-        url: https://github.com/affoa
-      - name: looks ios
-        url: https://github.com/affoa/iOS-Looks-App
-      - name: looks android
-        url: https://github.com/affoa/Android-Looks-App
-      - name: looks api
-        url: https://github.com/affoa/looks-api
+      - name: org datarobot
+        url: https://github.com/datarobot
+      - name: jenkins-jobs
+        url: https://github.com/datarobot/jenkins-jobs
+      - name: engprod
+        url: https://github.com/datarobot/engprod
+      - name: pytest-stereo
+        url: https://github.com/datarobot/pytest-stereo
+      - name: datarobot
+        url: https://github.com/datarobot/datarobot
       - name: archelon
         url: https://github.com/carsongee/archelon
-      - name: product
-        url: https://github.com/affoa/looks-product
-      - name: looks ios MFG
-        url: https://github.com/affoa/looks-ios-MFG
       - name: lambada
         url: https://github.com/superpedestrian/lambada
       - name: ops-lambada
         url: https://github.com/affoa/ops-lambada
-      - name: Member Portal
-        url: https://github.com/affoa/AFFOAMemberPortal
-      - name: ios-plaid
-        url: https://github.com/affoa/iOS-plaid-code-reader
-      - name: android-plaid
-        url: https://github.com/affoa/Android-plaid-code-reader
       - name: pytest-pylint
         url: https://github.com/carsongee/pytest-pylint
       - name: carsongee
@@ -62,14 +54,16 @@ fixed_links:
     name: Butler
     icon: fab fa-jenkins
     subs:
-      - name: looks-android
-        url: https://travis-ci.com/AFFOA/Android-Looks-App
-      - name: looks-ios
-        url: https://travis-ci.com/AFFOA/iOS-Looks-App
-      - name: looks-api
-        url: https://travis-ci.com/AFFOA/looks-api
-      - name: member-portal
-        url: https://travis-ci.com/AFFOA/AFFOAMemberPortal
+      - name: jenkins-hq
+        url: https://jenkins.hq.datarobot.com
+      - name: jenkins-test
+        url: https://jenkins-test.int.datarobot.com
+      - name: jenkins-ci
+        url: https://ci.int.datarobot.com/
+      - name: jenkins-ci2
+        url: https://ci.int.datarobot.com/
+      - name: DTS
+        url: https://jenkins.hq.datarobot.com/job/DataRobot_Test_Suite/
   - url: https://feedly.com
     name: Crier
     icon: fas fa-newspaper
