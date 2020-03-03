@@ -38,7 +38,7 @@ fixed_links:
         url: https://github.com/datarobot/engprod
       - name: pytest-stereo
         url: https://github.com/datarobot/pytest-stereo
-      - name: datarobot
+      - name: dr
         url: https://github.com/datarobot/datarobot
       - name: archelon
         url: https://github.com/carsongee/archelon
@@ -91,9 +91,6 @@ fixed_links:
         url: https://console.aws.amazon.com/route53/home?region=us-east-1
       - name: S3
         url: https://console.aws.amazon.com/s3/home?region=us-east-1
-  - url: https://facebook.com
-    name: Opiate
-    icon: fab fa-facebook
   - url: http://carsongee.com
     name: Vanity
     icon: fas fa-heart
