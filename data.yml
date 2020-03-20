@@ -38,6 +38,8 @@ fixed_links:
         url: https://github.com/datarobot/engprod
       - name: pytest-stereo
         url: https://github.com/datarobot/pytest-stereo
+      - name: pytest-testmon
+        url: https://github.com/datarobot/pytest-testmon
       - name: dr
         url: https://github.com/datarobot/datarobot
       - name: archelon
