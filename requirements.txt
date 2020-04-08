@@ -6,4 +6,5 @@ redis
 requests
 uwsgi
 paver
+werkzeug==0.16.0
 -e git+https://github.com/carsongee/Python-GoogleCalendarParser.git#egg=google-calendar-parser
