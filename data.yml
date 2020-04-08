@@ -52,6 +52,10 @@ fixed_links:
         url: https://github.com/carsongee/pytest-pylint
       - name: carsongee
         url: https://github.com/carsongee/carsongee.github.io
+      - name: signoff
+        url: https://engprod.drdev.io/app/pr-signoff
+      - name: fcs
+        url: https://engprod.drdev.io/app/tests/fcs
   - url: https://travis-ci.com/AFFOA
     name: Butler
     icon: fab fa-jenkins
