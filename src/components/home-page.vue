@@ -22,7 +22,6 @@
         ref="search"
         v-model="linkSearch"
         placeholder="Search Links"
-        autofocus
         @keyup.enter="goToFirstLink"
         @keyup.right="moveFocusRight"
         @keyup.left="moveFocusLeft"
@@ -64,6 +63,9 @@ const linksPerRow = 4;
 export default {
   name: 'home-page',
   components: { GitHub, UpcomingAppointments },
+  props: {
+    config: Object,
+  },
   mounted() {
     document.addEventListener('keydown', (event) => {
       const key = event.which;
@@ -71,9 +73,6 @@ export default {
         event.preventDefault();
       }
     });
-  },
-  props: {
-    config: Object,
   },
   data: function data() {
     return {
